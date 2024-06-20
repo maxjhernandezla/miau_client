@@ -1,21 +1,22 @@
+import { NavLink } from 'react-router-dom';
 import './Navbar.scss';
 
 const Navbar = () => {
   return (
     <div className="navbar">
       <div className="routes">
-        <div className="route">
+        <NavLink to="/" className="route">
           <img src="hogar.png" alt="home" />
           <p>Home</p>
-        </div>
-        <div className="route">
+        </NavLink>
+        <NavLink to="/my-cats" className="route">
           <img src="gato.png" alt="my-cats" />
           <p>My Cats</p>
-        </div>
-        <div className="route">
+        </NavLink>
+        <NavLink to="/profile" className="route">
           <img src="profile.png" alt="profile" />
           <p>Karen</p>
-        </div>
+        </NavLink>
       </div>
     </div>
   );

@@ -1,19 +1,14 @@
 import { useState, useRef } from 'react';
 import './ButtonContainer.scss';
-import axios from 'axios';
+import useApi from '../../hooks/useApi';
 
 const ButtonContainer = () => {
   const [audioUrl, setAudioUrl] = useState('');
   const audioRef = useRef(null); // Referencia al elemento de audio
-
-  const reproduce = async () => {
+  const { reproduce } = useApi();
+  const handleReproduce = async () => {
     try {
-      const response = await axios.get(
-        'https://miauserver-production.up.railway.app/api/sounds',
-        {
-          responseType: 'blob', // Para recibir el contenido como un objeto Blob
-        }
-      );
+      const response = reproduce();
 
       // Crear un objeto URL para el Blob recibido
       const audioBlob = new Blob([response.data], { type: 'audio/mpeg' });
@@ -39,7 +34,7 @@ const ButtonContainer = () => {
 
   return (
     <div className="button_container">
-      <div className="button_circle" onClick={reproduce}>
+      <div className="button_circle" onClick={handleReproduce}>
         {!audioUrl ? (
           <h4>Press me!</h4>
         ) : (

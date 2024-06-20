@@ -2,6 +2,7 @@
   display: flex;
   z-index: 1;
   height: 15vh;
+  width: 100%;
   background-color: #fcb857;
   align-items: flex-end;
   align-self: self-end;
@@ -17,6 +18,8 @@
       flex-direction: column;
       align-items: center;
       gap: 10px;
+      text-decoration: none;
+      color: inherit;
       img {
         height: 40px;
       }
