@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import { LoginContext } from '../context/LoginContext';
 import axios from 'axios';
 
-const useApi = () => {
+const useCatsApi = () => {
   const { user } = useContext(LoginContext);
 
   // const reproduce = async (sid) => {
@@ -59,7 +59,32 @@ const useApi = () => {
     return response.data;
   };
 
-  return { addCat, getCats, getCatById };
+  const updateCat = async (cid, cat) => {
+    const response = await axios.put(
+      `http://localhost:8080/api/cats/update/${cid}`,
+      cat,
+      {
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+        },
+      }
+    );
+    return response.data;
+  };
+
+  const deleteCat = async (cid) => {
+    const response = await axios.delete(
+      `http://localhost:8080/api/cats/delete/${cid}`,
+      {
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+        },
+      }
+    );
+    return response.data;
+  };
+
+  return { addCat, getCats, getCatById, updateCat, deleteCat };
 };
 
-export default useApi;
+export default useCatsApi;

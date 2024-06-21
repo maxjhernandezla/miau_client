@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import './Cat.scss';
-import useApi from '../../hooks/useApi';
+import useCatsApi from '../../hooks/useCatsApi';
 import { useNavigate, useParams } from 'react-router-dom';
 import CatImage from '../../components/CatImage/CatImage';
 
@@ -17,7 +17,7 @@ const CatDetail = () => {
   const [isEditing, setIsEditing] = useState(false);
   const navigate = useNavigate();
   const { cid } = useParams();
-  const { getCatById, addCat, updateCat } = useApi();
+  const { getCatById, addCat, updateCat, deleteCat } = useCatsApi();
 
   useEffect(() => {
     if (cid) {
@@ -51,6 +51,14 @@ const CatDetail = () => {
       await updateCat(cid, cat);
     } else {
       await addCat(cat);
+    }
+    navigate('/my-cats');
+  };
+
+  const handleDelete = async (e) => {
+    e.preventDefault();
+    if (isEditing) {
+      await deleteCat(cid);
     }
     navigate('/my-cats');
   };
@@ -128,6 +136,7 @@ const CatDetail = () => {
           </select>
         </div>
         <button type="submit">{isEditing ? 'Update Cat' : 'Add Cat'}</button>
+        {isEditing && <button onClick={handleDelete}>Delete</button>}
       </form>
     </div>
   );

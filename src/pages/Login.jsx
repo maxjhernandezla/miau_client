@@ -12,7 +12,6 @@ const Login = () => {
   const { logIn } = useContext(LoginContext);
   const navigate = useNavigate();
   const [error, setError] = useState('');
-  const [success, setSuccess] = useState('');
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -24,20 +23,17 @@ const Login = () => {
 
     try {
       logIn(formData);
-      setSuccess('Login successful');
       setError('');
+      navigate('/');
       // Aquí puedes manejar la lógica de redireccionamiento o almacenamiento del token
     } catch (err) {
       setError('Login failed');
-      setSuccess('');
     }
   };
 
   return (
     <div>
       <h2>Login</h2>
-      {error && <p style={{ color: 'red' }}>{error}</p>}
-      {success && <p style={{ color: 'green' }}>{success}</p>}
       <form onSubmit={handleSubmit}>
         <div>
           <label>Email:</label>
@@ -61,6 +57,7 @@ const Login = () => {
         </div>
         <button type="submit">Login</button>
       </form>
+      {error && <p style={{ color: 'red' }}>{error}</p>}
     </div>
   );
 };

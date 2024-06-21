@@ -1,48 +1,56 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import './ButtonContainer.scss';
-import useApi from '../../hooks/useApi';
+import useSoundsApi from '../../hooks/useSoundsApi';
 
 const ButtonContainer = () => {
   const [audioUrl, setAudioUrl] = useState('');
+  const [reproducing, setReproducing] = useState(false);
   const audioRef = useRef(null); // Referencia al elemento de audio
-  const { reproduce } = useApi();
-  const handleReproduce = async () => {
-    try {
-      const response = reproduce();
+  const { getAudio } = useSoundsApi();
 
-      // Crear un objeto URL para el Blob recibido
-      const audioBlob = new Blob([response.data], { type: 'audio/mpeg' });
-      const url = URL.createObjectURL(audioBlob);
+  useEffect(() => {
+    const fetchAudio = async () => {
+      try {
+        const response = await getAudio();
 
-      // Actualizar el estado con la URL del audio
-      setAudioUrl(url);
+        // Crear un objeto URL para el Blob recibido
+        const audioBlob = new Blob([response.data], { type: 'audio/mpeg' });
+        const url = URL.createObjectURL(audioBlob);
 
-      // Reiniciar la reproducción del audio si ya se estaba reproduciendo
-      if (audioRef.current) {
-        audioRef.current.currentTime = 0; // Reiniciar la posición de reproducción
-        audioRef.current.play(); // Iniciar la reproducción
+        // Actualizar el estado con la URL del audio
+        setAudioUrl(url);
+      } catch (error) {
+        console.error('Error al obtener el audio:', error);
       }
-    } catch (error) {
-      console.error('Error al obtener el audio:', error);
+    };
+
+    fetchAudio();
+  }, []);
+
+  const handleReproduce = () => {
+    if (audioRef.current) {
+      audioRef.current.currentTime = 0; // Reiniciar la posición de reproducción
+      audioRef.current.play(); // Iniciar la reproducción
+      setReproducing(true);
     }
   };
 
   const handleAudioEnded = () => {
     // Restablecer el estado de audioUrl a vacío cuando el audio termina
-    setAudioUrl('');
+    setReproducing(false);
   };
 
   return (
     <div className="button_container">
       <div className="button_circle" onClick={handleReproduce}>
-        {!audioUrl ? (
+        {!reproducing ? (
           <h4>Press me!</h4>
         ) : (
           <img src="reproducing.png" alt="reproducing" />
         )}
       </div>
       {audioUrl && (
-        <audio ref={audioRef} autoPlay onEnded={handleAudioEnded}>
+        <audio ref={audioRef} onEnded={handleAudioEnded}>
           <source src={audioUrl} type="audio/mpeg" />
           Su navegador no soporta el elemento de audio.
         </audio>

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import './AddCat.scss';
-import useApi from '../../hooks/useApi';
+import useCatsApi from '../../hooks/useCatsApi';
 import { useNavigate } from 'react-router-dom';
 import CatImage from '../../components/CatImage/CatImage';
 
@@ -15,7 +15,7 @@ const AddCat = () => {
     neutered: 'yes',
   });
   const navigation = useNavigate();
-  const { addCat } = useApi();
+  const { addCat } = useCatsApi();
   const handleChange = (e) => {
     const { name, value } = e.target;
     setCat({

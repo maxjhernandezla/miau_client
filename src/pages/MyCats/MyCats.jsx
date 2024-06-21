@@ -2,11 +2,11 @@ import { AiOutlinePlus } from 'react-icons/ai';
 import { NavLink } from 'react-router-dom';
 import './MyCats.scss';
 import { useEffect, useState } from 'react';
-import useApi from '../../hooks/useApi';
+import useCatsApi from '../../hooks/useCatsApi';
 import CatImage from '../../components/CatImage/CatImage';
 const MyCats = () => {
   const [cats, setCats] = useState([]);
-  const { getCats } = useApi();
+  const { getCats } = useCatsApi();
   useEffect(() => {
     const fetchCats = async () => {
       const userCats = await getCats();
