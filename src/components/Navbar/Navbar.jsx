@@ -9,6 +9,10 @@ const Navbar = () => {
           <img src="hogar.png" alt="home" />
           <p>Home</p>
         </NavLink>
+        <NavLink to="/sounds" className="route">
+          <img src="sounds.png" alt="sounds" />
+          <p>Sounds</p>
+        </NavLink>
         <NavLink to="/my-cats" className="route">
           <img src="gato.png" alt="my-cats" />
           <p>My Cats</p>

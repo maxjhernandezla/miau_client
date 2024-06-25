@@ -5,19 +5,10 @@ import { LoginContext } from '../context/LoginContext';
 const useSoundsApi = () => {
   const { user } = useContext(LoginContext);
 
-  const getSounds = async () => {
-    const response = await axios.get('http://localhost:8080/api/sounds', {
-      headers: {
-        Authorization: `Bearer ${user.token}`,
-      },
-    });
-    return response.data;
-  };
-
-  const getAudio = async (sid) => {
+  const getAudio = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:8080/api/calls/reproduce/${sid}`,
+        `http://localhost:8080/api/calls/reproduce/667b513857809eda99783ac5`,
         {
           responseType: 'blob', // Para recibir el contenido como un objeto Blob
           headers: {
@@ -32,7 +23,7 @@ const useSoundsApi = () => {
     }
   };
 
-  return { getAudio, getSounds };
+  return { getAudio };
 };
 
 export default useSoundsApi;

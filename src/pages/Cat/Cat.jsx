@@ -3,7 +3,7 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import './Cat.scss';
 import useCatsApi from '../../hooks/useCatsApi';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams, NavLink } from 'react-router-dom';
 import CatImage from '../../components/CatImage/CatImage';
 
 const CatDetail = () => {
@@ -13,6 +13,7 @@ const CatDetail = () => {
     birthday: new Date(),
     gender: 'female',
     neutered: 'yes',
+    _id: '',
   });
   const [isEditing, setIsEditing] = useState(false);
   const navigate = useNavigate();
@@ -135,6 +136,16 @@ const CatDetail = () => {
             <option value="no">No</option>
           </select>
         </div>
+        {isEditing && (
+          <>
+            <NavLink to={`/my-cats/${cat._id}/vaccines`} className="route">
+              <button>Go to vaccines</button>
+            </NavLink>
+            <NavLink to={`/my-cats/${cat._id}/add-vaccine`} className="route">
+              <button>Add vaccine</button>
+            </NavLink>
+          </>
+        )}
         <button type="submit">{isEditing ? 'Update Cat' : 'Add Cat'}</button>
         {isEditing && <button onClick={handleDelete}>Delete</button>}
       </form>

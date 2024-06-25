@@ -72,7 +72,7 @@ const CatForm = ({ onSubmit }) => {
           <DatePicker
             selected={cat.birthday}
             onChange={handleDateChange}
-            dateFormat="yyyy/MM/dd"
+            dateFormat="dd/MM/yyyy"
             maxDate={new Date()}
             showYearDropdown
             scrollableYearDropdown

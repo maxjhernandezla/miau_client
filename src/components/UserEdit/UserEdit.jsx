@@ -28,7 +28,6 @@ const UserEdit = () => {
     };
 
     fetchUser();
-    console.log(user);
   }, []);
 
   const handleChange = (e) => {

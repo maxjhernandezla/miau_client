@@ -1,13 +1,12 @@
 import { useState, useRef, useEffect } from 'react';
 import './ButtonContainer.scss';
-import useSoundsApi from '../../hooks/useSoundsApi';
+import useCallsApi from '../../hooks/useCallsApi';
 
 const ButtonContainer = () => {
   const [audioUrl, setAudioUrl] = useState('');
   const [reproducing, setReproducing] = useState(false);
   const audioRef = useRef(null); // Referencia al elemento de audio
-  const { getAudio } = useSoundsApi();
-
+  const { getAudio } = useCallsApi();
   useEffect(() => {
     const fetchAudio = async () => {
       try {
