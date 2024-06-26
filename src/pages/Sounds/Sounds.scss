@@ -1,0 +1,18 @@
+.group_buttons_container {
+  display: flex;
+  flex-wrap: wrap;
+  .sound_button {
+    background-color: orange;
+    width: 15vw;
+    margin: 5px;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 10px;
+    .button_img {
+      width: 100%;
+    }
+  }
+}

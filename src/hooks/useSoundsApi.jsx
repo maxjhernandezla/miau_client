@@ -4,9 +4,10 @@ import { LoginContext } from '../context/LoginContext';
 
 const useSoundsApi = () => {
   const { user } = useContext(LoginContext);
+  const VITE_API_URL = import.meta.env.VITE_API_URL;
 
   const getSounds = async () => {
-    const response = await axios.get('http://localhost:8080/api/sounds', {
+    const response = await axios.get(`${VITE_API_URL}/sounds`, {
       headers: {
         Authorization: `Bearer ${user.token}`,
       },
@@ -17,7 +18,7 @@ const useSoundsApi = () => {
   const getAudio = async (sid) => {
     try {
       const response = await axios.get(
-        `http://localhost:8080/api/calls/reproduce/${sid}`,
+        `${VITE_API_URL}/calls/reproduce/${sid}`,
         {
           responseType: 'blob', // Para recibir el contenido como un objeto Blob
           headers: {

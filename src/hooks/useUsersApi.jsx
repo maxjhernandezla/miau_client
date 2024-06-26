@@ -4,11 +4,11 @@ import axios from 'axios';
 
 const useUsersApi = () => {
   const { user } = useContext(LoginContext);
-
+  const VITE_API_URL = import.meta.env.VITE_API_URL;
   const getUserById = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:8080/api/users/${user.user_id}`,
+        `${VITE_API_URL}/users/${user.user_id}`,
         {
           headers: {
             Authorization: `Bearer ${user.token}`,
@@ -25,7 +25,7 @@ const useUsersApi = () => {
   const updateUser = async (updatedData) => {
     try {
       const response = await axios.put(
-        `http://localhost:8080/api/users/update/${user.user_id}`,
+        `${VITE_API_URL}/update/${user.user_id}`,
         updatedData,
         {
           headers: {

@@ -12,28 +12,52 @@ export const LoginProvider = ({ children }) => {
     role: null,
   });
 
+  const VITE_API_URL = import.meta.env.VITE_API_URL;
+
   useEffect(() => {
     const token = localStorage.getItem('token');
-    const user_id = localStorage.getItem('user_id');
-    const role = localStorage.getItem('role');
-
-    if (token && user_id && role) {
-      setUser({
-        user_id,
-        logged: true,
-        error: null,
-        token,
-        role,
-      });
+    // const user_id = localStorage.getItem('user_id');
+    // const role = localStorage.getItem('role');
+    if (user.logged === false && token) {
+      const verifyToken = async () => {
+        try {
+          const response = await axios.get(`${VITE_API_URL}/sessions/current`, {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
+          if (response.data) {
+            setUser({
+              user_id: response.data._id,
+              logged: true,
+              error: null,
+              token,
+              role: response.data.role,
+            });
+          } else {
+            logOut();
+          }
+        } catch (error) {
+          console.error('Error al verificar el token:', error);
+          logOut();
+        }
+      };
+      verifyToken();
     }
+    // if (token && user_id && role) {
+    //   setUser({
+    //     user_id,
+    //     logged: true,
+    //     error: null,
+    //     token,
+    //     role,
+    //   });
+    // }
   }, []);
 
   const logIn = async (values) => {
     try {
-      const response = await axios.post(
-        'http://localhost:8080/api/users/login',
-        values
-      );
+      const response = await axios.post(`${VITE_API_URL}/users/login`, values);
       const { accessToken, user } = response.data;
       localStorage.setItem('token', accessToken);
       localStorage.setItem('user_id', user._id);
@@ -67,7 +91,7 @@ export const LoginProvider = ({ children }) => {
 
   const register = async (values) => {
     try {
-      await axios.post('http://localhost:8080/api/users/register', values);
+      await axios.post(`${VITE_API_URL}/users/register`, values);
     } catch (error) {
       console.error('Error al realizar la solicitud:', error);
       throw error;
