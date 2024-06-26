@@ -12,21 +12,18 @@ export const PrivateRoutes = () => {
   return (
     <>
       <Routes>
-        <Route path="/miau_client/" element={<Home />} />
-        <Route path="/miau_client/my-cats" element={<MyCats />} />
-        <Route path="/miau_client/my-cats/:cid" element={<Cat />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/my-cats" element={<MyCats />} />
+        <Route path="/my-cats/:cid" element={<Cat />} />
         <Route
           path="/miau_client/my-cats/:cid/vaccines"
           element={<CatVaccinations />}
         />
-        <Route
-          path="/miau_client/my-cats/:cid/add-vaccine"
-          element={<AddVaccine />}
-        />
-        <Route path="/miau_client/add-cat" element={<Cat />} />
-        <Route path="/miau_client/profile" element={<User />} />
-        <Route path="/miau_client/sounds" element={<Sounds />} />
-        <Route path="*" element={<Navigate to="/miau_client/" />} />
+        <Route path="/my-cats/:cid/add-vaccine" element={<AddVaccine />} />
+        <Route path="/add-cat" element={<Cat />} />
+        <Route path="/profile" element={<User />} />
+        <Route path="/sounds" element={<Sounds />} />
+        <Route path="*" element={<Navigate to="/" />} />
       </Routes>
       <Navbar />
     </>
