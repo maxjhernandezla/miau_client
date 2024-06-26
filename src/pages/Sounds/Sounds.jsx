@@ -63,9 +63,17 @@ const Sounds = () => {
                 onClick={() => handleSoundClick(sound)}
               >
                 {playingSoundId !== sound._id ? (
-                  <img className="button_img" src="play.png" alt="Play" />
+                  <img
+                    className="button_img"
+                    src="https://firebasestorage.googleapis.com/v0/b/huellapp-579e9.appspot.com/o/miau_images%2Fplay.png?alt=media&token=5ad126ec-3e63-4466-9d84-92589f849565"
+                    alt="Play"
+                  />
                 ) : (
-                  <img className="button_img" src="pause.png" alt="Pause" />
+                  <img
+                    className="button_img"
+                    src="https://firebasestorage.googleapis.com/v0/b/huellapp-579e9.appspot.com/o/miau_images%2Fpause.png?alt=media&token=f595f610-e624-4ad7-ba82-85c34a10a695"
+                    alt="Pause"
+                  />
                 )}
                 <audio
                   ref={(element) => {

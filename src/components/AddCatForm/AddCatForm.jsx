@@ -34,7 +34,10 @@ const CatForm = ({ onSubmit }) => {
   return (
     <div className="add-cat-form">
       <div className="cat_img">
-        <img src="logo.png" alt="cat_img" />
+        <img
+          src="https://firebasestorage.googleapis.com/v0/b/huellapp-579e9.appspot.com/o/miau_images%2Flogo.png?alt=media&token=e0b242d9-9255-4c9d-b101-2976b92a3368"
+          alt="cat_img"
+        />
       </div>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
