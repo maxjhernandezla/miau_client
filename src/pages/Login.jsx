@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import { useContext } from 'react';
 import { LoginContext } from '../context/LoginContext';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, NavLink } from 'react-router-dom';
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -57,6 +57,7 @@ const Login = () => {
         </div>
         <button type="submit">Login</button>
       </form>
+      <NavLink to="/register">Register</NavLink>
       {error && <p style={{ color: 'red' }}>{error}</p>}
     </div>
   );

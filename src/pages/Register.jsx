@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import { useContext } from 'react';
 import { LoginContext } from '../context/LoginContext';
+import { NavLink } from 'react-router-dom';
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -78,6 +79,7 @@ const Register = () => {
         </div>
         <button type="submit">Register</button>
       </form>
+      <NavLink to="/register">Register</NavLink>
     </div>
   );
 };
