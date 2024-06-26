@@ -5,9 +5,9 @@ import Register from '../pages/Register';
 export const PublicRoutes = () => {
   return (
     <Routes>
-      <Route path="/login" element={<Login />} />
-      <Route path="/register" element={<Register />} />
-      <Route path="*" element={<Navigate to="/login" />} />
+      <Route path="/miau_client/login" element={<Login />} />
+      <Route path="/miau_client/register" element={<Register />} />
+      <Route path="*" element={<Navigate to="/miau_client/login" />} />
     </Routes>
   );
 };

@@ -45,7 +45,10 @@ const ButtonContainer = () => {
         {!reproducing ? (
           <h4>Press me!</h4>
         ) : (
-          <img src="reproducing.png" alt="reproducing" />
+          <img
+            src="https://firebasestorage.googleapis.com/v0/b/huellapp-579e9.appspot.com/o/miau_images%2Fsounds.png?alt=media&token=0585495c-f66f-458e-9d62-8b022d7d6119"
+            alt="reproducing"
+          />
         )}
       </div>
       {audioUrl && (
