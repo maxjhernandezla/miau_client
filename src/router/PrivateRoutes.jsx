@@ -15,10 +15,7 @@ export const PrivateRoutes = () => {
         <Route path="/" element={<Home />} />
         <Route path="/my-cats" element={<MyCats />} />
         <Route path="/my-cats/:cid" element={<Cat />} />
-        <Route
-          path="/miau_client/my-cats/:cid/vaccines"
-          element={<CatVaccinations />}
-        />
+        <Route path="/my-cats/:cid/vaccines" element={<CatVaccinations />} />
         <Route path="/my-cats/:cid/add-vaccine" element={<AddVaccine />} />
         <Route path="/add-cat" element={<Cat />} />
         <Route path="/profile" element={<User />} />

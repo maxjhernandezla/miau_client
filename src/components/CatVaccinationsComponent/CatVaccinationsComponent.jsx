@@ -1,27 +1,17 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { formatDate } from '../../helpers/formatDate';
+import groupAndSortVaccinations from '../../helpers/groupAndSortVaccinations';
 
-const CatVaccinations = ({ catVaccinations }) => {
-  // Agrupar las vacunaciones por vaccine_id._id
-  const groupedVaccinations = catVaccinations.reduce((acc, vaccination) => {
-    const vaccineId = vaccination.vaccine_id._id;
-    if (!acc[vaccineId]) {
-      acc[vaccineId] = [];
-    }
-    acc[vaccineId].push(vaccination);
-    return acc;
-  }, {});
-
-  // Ordenar las vacunaciones dentro de cada grupo por fecha
-  Object.keys(groupedVaccinations).forEach((vaccineId) => {
-    groupedVaccinations[vaccineId].sort(
-      (a, b) => new Date(b.date) - new Date(a.date)
-    );
-  });
-
+const CatVaccinationsComponent = ({ catVaccinations }) => {
+  const [groupedVaccinations, setGroupedVaccinations] = useState({});
   const [openGroups, setOpenGroups] = useState({});
 
-  // Manejar la apertura y cierre de los grupos
+  useEffect(() => {
+    if (catVaccinations && catVaccinations.length > 0) {
+      setGroupedVaccinations(groupAndSortVaccinations(catVaccinations));
+    }
+  }, [catVaccinations]);
+
   const toggleGroup = (vaccineId) => {
     setOpenGroups((prevState) => ({
       ...prevState,
@@ -48,9 +38,11 @@ const CatVaccinations = ({ catVaccinations }) => {
               onClick={() => toggleGroup(vaccineId)}
             >
               <h3>{vaccineName}</h3>
-              <p>
-                Next due date: {formatDate(mostRecentVaccine.next_due_date)}
-              </p>
+              {mostRecentVaccine.next_due_date && (
+                <p>
+                  Next due date: {formatDate(mostRecentVaccine.next_due_date)}
+                </p>
+              )}
               <button>{isOpen ? 'Hide' : 'Show'}</button>
             </div>
             {isOpen && (
@@ -70,4 +62,4 @@ const CatVaccinations = ({ catVaccinations }) => {
   );
 };
 
-export default CatVaccinations;
+export default CatVaccinationsComponent;

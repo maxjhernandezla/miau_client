@@ -18,9 +18,8 @@ const CatVaccinations = () => {
         console.error('Error fetching cat vaccines:', error);
       }
     };
-
     fetchCatVaccines();
-  }, [cid]);
+  }, []);
 
   return (
     <div className="cat_vaccinations_container">

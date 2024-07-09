@@ -66,12 +66,13 @@ const useCatsApi = () => {
         Authorization: `Bearer ${user.token}`,
       },
     });
+    console.log(response);
     return response.data;
   };
 
   const addVaccineToCat = async (cid, vid, vaccine) => {
     const response = await axios.post(
-      `${VITE_API_URL}s/cats/${cid}/vaccines/${vid}`,
+      `${VITE_API_URL}/cats/${cid}/vaccines/${vid}`,
       vaccine,
       {
         headers: {
